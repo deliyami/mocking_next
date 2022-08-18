@@ -1,0 +1,33 @@
+{
+  "character": [
+    {
+      "id": 1,
+      "name": "철수",
+      "good": 0,
+      "bad": 0,
+      "img": ""
+    },
+    [
+      {
+        "name": "minsu"
+      }
+    ],
+    [
+      {
+        "name": "minsu",
+        "good": 0,
+        "bad": 0,
+        "img": ""
+      }
+    ],
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "first_name": "Fred",
+      "last_name": "Blair",
+      "email": "freddyb34@gmail.com"
+    }
+  ]
+}
