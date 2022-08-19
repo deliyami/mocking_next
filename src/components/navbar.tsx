@@ -1,3 +1,4 @@
+import { Button, Input } from "@mui/material";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { FC, FormEvent, FormEventHandler, useState } from "react";
@@ -9,22 +10,24 @@ const Navbar: FC = () => {
     e: FormEvent<HTMLFormElement>
   ) => {
     e.preventDefault();
-    console.log(name);
     router.push(`/search/${name}`, undefined, {});
-    // router.replace(`search/${name}`);
   };
   return (
     <>
-      <Link href={"/"}>홈</Link>
-      <Link href={"/upload"}>업로드</Link>
+      <Link href={"/"}>
+        <Button>홈</Button>
+      </Link>
+      <Link href={"/upload"}>
+        <Button>업로드</Button>
+      </Link>
       <form onSubmit={onSubmitHandler}>
-        <input
+        <Input
           type="text"
           placeholder="캐릭터 이름"
           value={name}
           onChange={(e) => setName(e.target.value)}
         />
-        <input type="submit" value="검색" />
+        <Button type="submit">검색</Button>
       </form>
     </>
   );

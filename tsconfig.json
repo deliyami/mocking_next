@@ -2,7 +2,12 @@
   "compilerOptions": {
     "target": "es5",
     "baseUrl": ".",
-    "lib": ["dom", "dom.iterable", "esnext"],
+    "lib": [
+      "es6",
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
@@ -16,11 +21,27 @@
     "jsx": "preserve",
     "incremental": true,
     "paths": {
-      "@src/*": ["src/*"],
-      "@public/*": ["public/*"],
-      "@db/*": ["db/*"]
-    }
+      "@src/*": [
+        "src/*"
+      ],
+      "@public/*": [
+        "public/*"
+      ],
+      "@db/*": [
+        "db/*"
+      ]
+    },
+    "noImplicitAny": true,
+    "noImplicitThis": true,
+    "strictNullChecks": true
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "db/server.js"],
-  "exclude": ["node_modules"]
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    "db/server.js"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
 }

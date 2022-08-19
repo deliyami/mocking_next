@@ -1,6 +1,5 @@
 import type { NextPage } from "next";
-// import axios from "@src/api/defaultAxios";
-import axios from "axios";
+import axios from "@src/helper/defaultAxios";
 import { useRouter } from "next/router";
 import {
   ChangeEvent,
@@ -13,16 +12,13 @@ import {
   useState,
 } from "react";
 import Image from "next/image";
+import { AxiosResponse } from "axios";
 
 const Upload: NextPage = () => {
   const [name, setName] = useState<string>("");
   const [img, setImg] = useState();
   const imgInput = useRef<HTMLInputElement>(null);
   const router = useRouter();
-  // const uploadChar = async () => {
-  //   const result = await axios("character", "post");
-  //   return result;
-  // };
   const onSubmitHandler: FormEventHandler<HTMLFormElement> = async (
     e: FormEvent<HTMLFormElement>
   ) => {
@@ -36,29 +32,23 @@ const Upload: NextPage = () => {
       alert("이미지를 입력해주세요");
       return;
     }
-    // console.log(uploadName, img);
-    // const result = uploadChar();
-    // const result = await axios("character", "post", {
-    //   name: "minsu",
-    //   good: 0,
-    //   bad: 0,
-    //   img: "",
-    // });
+    const result: AxiosResponse<any, any> | void = await axios(
+      "character",
+      "post",
+      {
+        name: uploadName,
+        like: 0,
+        hate: 0,
+        img,
+      }
+    );
 
-    const result = axios
-      .post("http://localhost:3001/character", {
-        id: 6,
-        first_name: "Fred",
-        last_name: "Blair",
-        email: "freddyb34@gmail.com",
-      })
-      .then((resp) => {
-        console.log(resp.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-    console.log(result);
+    if (result && result.status === 201) {
+      alert("캐릭터가 생성되었습니다");
+      router.push(`/char/${result.data.id}`, undefined, {});
+    } else {
+      alert("에러가 발생했습니다.");
+    }
   };
 
   const encodeFileToBase64 = (fileBlob: Blob) => {
@@ -77,7 +67,6 @@ const Upload: NextPage = () => {
     e: ChangeEvent<HTMLInputElement>
   ) => {
     e.preventDefault();
-    console.log(e);
     const target = e.target;
     if (target.files && target.files.length > 0) {
       encodeFileToBase64(target.files[0]);
@@ -118,13 +107,6 @@ const Upload: NextPage = () => {
 
         <input type="submit" value="업로드" />
       </form>
-      {/* <button
-        onClick={() => {
-          console.log(img);
-        }}
-      >
-        지금 이미지
-      </button> */}
     </>
   );
 };
